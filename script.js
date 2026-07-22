@@ -5,7 +5,7 @@
    ============================================================ */
 
 /* ============================ CONTENT ============================ */
-const START_DATE = new Date('2025-07-23T00:00:00'); // <-- set your real "together since" date/time here
+const START_DATE = new Date('2025-07-25T00:00:00'); // <-- set your real "together since" date/time here
 
 const TIMELINE = [
   { title: 'First Meeting',      photo: 'FirstMeeting.jpeg', text: 'The day our paths crossed for the very first time, without either of us knowing what it would become.' },
