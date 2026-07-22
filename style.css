@@ -132,7 +132,15 @@ h1,h2,h3{ font-family: var(--font-display); color: var(--deep-rose); }
   60%{ transform: scale(1); }
 }
 .loader-text{
-font-family:'Great Vibes', cursive;
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.8rem;
+    line-height: 1.8;
+    color: #6b4a57;
+    width: 85%;
+    max-width: 1000px;
+    text-align: center;
+    margin: 25px auto;
+    padding: 0 20px;
 }
 .loader-sub{ margin-top:6px; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color: var(--ink-soft); }
 .loader-bar{
