@@ -12,8 +12,8 @@ const TIMELINE = [
   { title: 'First Conversation', photo: 'FirstConvo.jpeg',   text: 'Hours felt like minutes. We talked about everything and nothing, and I didn\'t want it to end.' },
   { title: 'First Date',         photo: 'FirstDate.jpeg',    text: 'Nervous hands, shy smiles, and a night I still remember in perfect detail.' },
   { title: 'First Selfie',       photo: 'FirstSelfie.jpeg',  text: 'Proof that even our silliest, unplanned moments turned into memories worth keeping.' },
-  { title: 'First Trip',         photo: 'FirstBeach.jpeg',   text: 'New places, same us — that\'s when I knew home wasn\'t a place, it was you.' },
-  { title: 'First Anniversary',  photo: 'FirstTrek.jpeg',    text: 'Three hundred and sixty five days later, and I\'d choose you in every single one of them again.' },
+  { title: 'First Beach Visit',         photo: 'FirstBeach.jpeg',   text: 'New places, same us — that\'s when I knew home wasn\'t a place, it was you.' },
+  { title: 'First Trek',  photo: 'FirstTrek.jpeg',    text: 'Three hundred and sixty five days later, and I\'d choose you in every single one of them again.' },
 ];
 
 // All 30 gallery photos, in the order they should appear.
