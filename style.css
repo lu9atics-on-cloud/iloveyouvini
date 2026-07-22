@@ -132,7 +132,7 @@ h1,h2,h3{ font-family: var(--font-display); color: var(--deep-rose); }
   60%{ transform: scale(1); }
 }
 .loader-text{
-  margin-top: 18px; font-family: var(--font-display); font-size: 1.8rem; color: var(--deep-rose);
+font-family:'Great Vibes', cursive;
 }
 .loader-sub{ margin-top:6px; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color: var(--ink-soft); }
 .loader-bar{
