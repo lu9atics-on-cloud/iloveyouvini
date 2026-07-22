@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy First Anniversary — Aman ❤ Vini</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= AMBIENT FLOATING LAYER ================= -->
+<div class="ambient-layer" id="ambientLayer"></div>
+<div class="bg-blur-circle" style="width:400px;height:400px;top:10%;left:-8%;"></div>
+<div class="bg-blur-circle" style="width:300px;height:300px;bottom:5%;right:-6%;"></div>
+
+<!-- ================= LOADER ================= -->
+<div id="loader">
+  <div class="loader-heart">❤</div>
+  <div class="loader-text">Loading Our Love Story…</div>
+  <div class="loader-sub">Please wait</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- ================= GIFT OPENING ================= -->
+<div id="gift-screen">
+  <div class="gift-box" id="giftBox">🎁</div>
+  <div class="gift-hint">A little something for you…</div>
+  <button class="gift-btn" id="openGiftBtn">Open My Gift ❤</button>
+</div>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar" id="navbar">
+  <a href="#hero" class="nav-logo">A ❤ V</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#hero" class="nav-link active">Home</a></li>
+    <li><a href="#story" class="nav-link">Story</a></li>
+    <li><a href="#gallery" class="nav-link">Gallery</a></li>
+    <li><a href="#letter" class="nav-link">Letter</a></li>
+    <li><a href="#forever" class="nav-link">Forever</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle">☰</button>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="hero">
+  <div class="hero-glass reveal-scale">
+    <span class="hero-eyebrow">365 Days · Infinite Memories</span>
+    <h1>Happy First<br>Anniversary</h1>
+    <div class="hero-names">Aman ❤ Vini</div>
+    <p style="color:var(--ink-soft); max-width:420px; margin:0 auto 10px; font-size:0.95rem; line-height:1.7;">
+      One beautiful love story, still being written — one day, one smile, one memory at a time.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat"><b>365</b><span>Days</span></div>
+      <div class="hero-stat"><b>12</b><span>Months</span></div>
+      <div class="hero-stat"><b>∞</b><span>Memories</span></div>
+    </div>
+    <a href="#story" class="hero-btn">Begin Our Journey</a>
+  </div>
+  <div class="scroll-cue">⌄</div>
+</section>
+
+<!-- ================= OUR STORY ================= -->
+<section id="story">
+  <span class="section-kicker">Where it began</span>
+  <h2 class="section-title reveal">Our Story</h2>
+  <p class="section-sub reveal">Every love story is beautiful, but ours is my favorite — here's how it all started.</p>
+
+  <div class="timeline" id="timeline">
+    <!-- filled by JS -->
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section id="gallery" style="background:var(--white);">
+  <span class="section-kicker">Frozen in time</span>
+  <h2 class="section-title reveal">Gallery</h2>
+  <p class="section-sub reveal">Thirty little moments. Replace these placeholders with your own photos in <code>assets/photos/</code>.</p>
+  <div class="gallery-grid" id="galleryGrid"></div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lightboxClose">✕</span>
+  <span class="lightbox-nav lightbox-prev" id="lightboxPrev">‹</span>
+  <div class="lightbox-inner" id="lightboxInner"></div>
+  <span class="lightbox-nav lightbox-next" id="lightboxNext">›</span>
+</div>
+
+<!-- ================= MEMORY CARDS ================= -->
+<section>
+  <span class="section-kicker">Our memories</span>
+  <h2 class="section-title reveal">Favorite Moments</h2>
+  <p class="section-sub reveal">The little things that made this year unforgettable.</p>
+  <div class="memory-grid" id="memoryGrid"></div>
+</section>
+
+<!-- ================= LOVE LETTER ================= -->
+<section id="letter" style="background:var(--white);">
+  <span class="section-kicker">From my heart</span>
+  <h2 class="section-title reveal">Love Letter</h2>
+  <div class="letter-wrap reveal">
+    <div class="envelope" id="envelope">
+      <div class="envelope-body">💌</div>
+      <div class="envelope-flap"></div>
+    </div>
+    <div class="envelope-hint">Tap the envelope to open</div>
+    <div class="letter-paper" id="letterPaper">
+      <p id="typewriterText"></p>
+      <div class="letter-sign">Forever Yours,<br>Aman ❤</div>
+    </div>
+    <a class="hidden-letter-trigger" id="hiddenLetterTrigger">Open when you're sad 🎁</a>
+  </div>
+</section>
+
+<!-- ================= REASONS I LOVE YOU ================= -->
+<section>
+  <span class="section-kicker">A few of many</span>
+  <h2 class="section-title reveal">Reasons I Love You</h2>
+  <div class="reasons-grid" id="reasonsGrid"></div>
+</section>
+
+<!-- ================= QUOTES ================= -->
+<section style="background:var(--white);">
+  <span class="section-kicker">In other words</span>
+  <h2 class="section-title reveal">Favorite Quotes</h2>
+  <div class="quote-carousel">
+    <div class="quote-slide active">"Every love story is beautiful, but ours is my favorite."</div>
+    <div class="quote-slide">"In your smile, I found my home."</div>
+    <div class="quote-slide">"One year with you feels like one perfect moment, stretched forever."</div>
+    <div class="quote-slide">"You are my today, and all of my tomorrows."</div>
+    <div class="quote-dots" id="quoteDots"></div>
+  </div>
+</section>
+
+<!-- ================= LIVE TIMER ================= -->
+<section class="timer-section" id="timer-section">
+  <span class="section-kicker">Every second counts</span>
+  <h2 class="section-title reveal">Together Since</h2>
+  <p class="section-sub reveal" style="margin-bottom:10px;">Update the start date in <code>script.js</code> to your real anniversary date.</p>
+  <div class="timer-grid">
+    <div class="timer-box"><b id="t-years">00</b><span>Years</span></div>
+    <div class="timer-box"><b id="t-months">00</b><span>Months</span></div>
+    <div class="timer-box"><b id="t-days">00</b><span>Days</span></div>
+    <div class="timer-box"><b id="t-hours">00</b><span>Hours</span></div>
+    <div class="timer-box"><b id="t-mins">00</b><span>Minutes</span></div>
+    <div class="timer-box"><b id="t-secs">00</b><span>Seconds</span></div>
+  </div>
+</section>
+
+<!-- ================= FUTURE DREAMS ================= -->
+<section style="background:var(--white);">
+  <span class="section-kicker">What's next</span>
+  <h2 class="section-title reveal">Future Dreams</h2>
+  <div class="dreams-grid" id="dreamsGrid"></div>
+</section>
+
+<!-- ================= FINAL SURPRISE ================= -->
+<section class="surprise-section" id="surprise">
+  <span class="section-kicker">One last thing…</span>
+  <h2 class="section-title reveal">One Last Thing…</h2>
+  <div class="surprise-heart" id="surpriseHeart">❤</div>
+  <div class="surprise-caption">Tap the heart</div>
+</section>
+
+<!-- ================= FINAL SCREEN ================= -->
+<section class="final-screen" id="forever">
+  <h1>Happy First Anniversary</h1>
+  <div class="hero-names">Vini ❤</div>
+  <p>Thank you for every memory, every smile, every hug, every moment.<br>I love you forever.</p>
+  <div class="final-sign">Forever Yours,<br>Aman ❤</div>
+</section>
+
+<footer>Made with ❤ for Vini, by Aman — {YEAR}</footer>
+
+<!-- ================= MUSIC PLAYER ================= -->
+<button class="music-fab" id="musicFab" aria-label="Play music">🎵</button>
+<audio id="bgAudio" src="assets/music/song.mp3" loop preload="none"></audio>
+
+<!-- ================= SECRET / HIDDEN POPUPS ================= -->
+<div class="popup-overlay" id="secretPopup">
+  <div class="popup-card">
+    <h3>Secret Message 🔓</h3>
+    <p id="secretMessageText">You found it. Five taps of the heart, just to reach five more words: I love you more today.</p>
+    <button class="popup-close" data-close="secretPopup">Close</button>
+  </div>
+</div>
+
+<div class="popup-overlay" id="sadLetterPopup">
+  <div class="popup-card">
+    <h3>Open When You're Sad 💌</h3>
+    <p>Whatever today looks like — I'm here. You've survived every hard day so far, and you're not doing this one alone either. Breathe. I love you, on the easy days and the hard ones.</p>
+    <button class="popup-close" data-close="sadLetterPopup">Close</button>
+  </div>
+</div>
+
+<div class="popup-overlay" id="thankYouPopup">
+  <div class="popup-card">
+    <h3>Thank You ✨</h3>
+    <p>Thank you for saying yes — to this love, this life, this us.</p>
+    <button class="popup-close" data-close="thankYouPopup">Close</button>
+  </div>
+</div>
+
+<div class="random-memory-banner" id="randomMemoryBanner">📷 <span id="randomMemoryText"></span></div>
+
+<canvas id="confetti-canvas"></canvas>
+
+<script src="script.js"></script>
+</body>
+</html>
