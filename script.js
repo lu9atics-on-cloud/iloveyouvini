@@ -52,7 +52,7 @@ const SECRET_MESSAGE = "You found it. Five taps of the heart, just to reach five
 window.addEventListener('load', () => {
   setTimeout(() => {
     document.getElementById('loader').classList.add('hidden');
-  }, 3000);
+  }, 10000);
 });
 
 /* ---------------- Gift opening ---------------- */
