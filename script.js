@@ -8,15 +8,31 @@
 const START_DATE = new Date('2025-07-25T00:00:00'); // <-- set your real "together since" date/time here
 
 const TIMELINE = [
-  { title: 'The First Hello',     photo: 'FirstMeet.mp4',     text: 'The day our paths crossed for the very first time, without either of ' },
-  { title: 'The First Meet', photo: 'FirstConvo.jpeg',   text: 'Hours felt like minutes. We talked about everything and nothing, and ' },
-  { title: 'First Selfie',        photo: 'FirstDate.mp4',     text: 'Nervous hands, shy smiles, and a night I still remember in perfect de' },
-  { title: 'First Date', photo: 'FirstConvo.jpeg',   text: 'Hours felt like minutes. We talked about everything and nothing, and ' },
-  { title: 'We and Our fav spot',      photo: 'FirstSelfie.jpeg',  text: 'Proof that even our silliest, unplanned moments turned into memories ' },
-  { title: 'First Outing', photo: 'FirstBeach.jpeg',   text: 'New places, same us - that\'s when I knew home wasn\'t a place, it wa' },
-  { title: 'The Proposal', photo: 'FirstConvo.jpeg',   text: 'Hours felt like minutes. We talked about everything and nothing, and ' },
-  { title: 'The Acceptance',        photo: 'FirstDate.mp4',     text: 'Nervous hands, shy smiles, and a night I still remember in perfect de' },
-  { title: 'We',        photo: 'FirstTrek.jpeg',    text: 'Three hundred and sixty five days later, and I\'d choose you in every ' }
+  {
+    title: 'The First Hello',
+    photo: 'The First Hello.jpeg',
+    text: 'The day our paths crossed for the very first time, without either of us knowing how special this journey would become.'
+  },
+  {
+    title: 'First Meet',
+    photo: 'The First Meet.jpeg',
+    text: 'Seeing you in person for the first time felt unreal. That moment still lives in my heart.'
+  },
+  {
+    title: 'First Date',
+    photo: 'First Date.jpeg',
+    text: 'Nervous smiles, endless conversations, and a day that became one of my favorite memories forever.'
+  },
+  {
+    title: 'First Outing',
+    photo: 'First Outing.mp4',
+    text: 'Every step we took together made me realize that life feels brighter when you are beside me.'
+  },
+  {
+    title: 'Our Favorite Spot',
+    photo: 'We and Our fav spot.jpeg',
+    text: 'A place that became ours. No matter how many places we visit, this one will always be special.'
+  }
 ];
 
 // All gallery media, in the order they should appear. Videos (.mp4) and photos (.jpeg) can be mixed freely.
