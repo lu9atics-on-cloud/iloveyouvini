@@ -151,7 +151,7 @@ h1,h2,h3{ font-family: var(--font-display); color: var(--gold); font-weight: 600
   margin-top: 22px; width: 180px; height: 2px; border-radius: 2px; background: rgba(255,255,255,0.05); overflow:hidden;
 }
 .loader-bar-fill{
-  height:100%; width:0%; background: var(--blood-red); animation: loaderFill 3s ease forwards;
+  height:100%; width:0%; background: var(--blood-red); animation: loaderFill 7s ease forwards;
 }
 @keyframes loaderFill{ to{ width:100%; } }
 
