@@ -9,9 +9,9 @@
   --rose-pink: #FF4D8D;
   --white: #FFFFFF;
   --light-peach: #FFF4F8;
-  --deep-rose: #B4275A;
-  --gold: #F3C77A;
-  --ink: #4A2036;
+  --deep-rose: #B4275A;      /* contrast accent, derived from Rose Pink */
+  --gold: #F3C77A;           /* signature sparkle accent */
+  --ink: #4A2036;            /* warm near-black for text, not pure black */
   --ink-soft: #8A5B72;
 
   --font-display: 'Great Vibes', cursive;
@@ -88,7 +88,7 @@ h1,h2,h3{ font-family: var(--font-display); color: var(--deep-rose); }
 }
 
 /* ============================================================
-   Ambient floating layer
+   Ambient floating layer (hearts / petals / sparkles)
    ============================================================ */
 .ambient-layer{
   position: fixed; inset:0; pointer-events:none; z-index: 5; overflow:hidden;
@@ -111,7 +111,7 @@ h1,h2,h3{ font-family: var(--font-display); color: var(--deep-rose); }
 }
 
 /* ============================================================
-   Loading screen & Music Selection
+   Loading screen
    ============================================================ */
 #loader{
   position:fixed; inset:0; z-index: 100;
@@ -150,47 +150,6 @@ h1,h2,h3{ font-family: var(--font-display); color: var(--deep-rose); }
   height:100%; width:0%; background: var(--rose-pink); animation: loaderFill 3s ease forwards;
 }
 @keyframes loaderFill{ to{ width:100%; } }
-
-/* Music Selection specific styles */
-.music-selection-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: fadeSlide 0.8s ease;
-}
-.music-options {
-  width: 100%;
-  max-width: 320px;
-  text-align: left;
-}
-.music-options label {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 18px;
-  background: rgba(255, 255, 255, 0.45);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  border: 1px solid rgba(255, 77, 141, 0.1);
-}
-.music-options label:hover {
-  background: rgba(255, 255, 255, 0.8);
-  transform: translateX(4px);
-}
-.music-options input[type="radio"] {
-  accent-color: var(--rose-pink);
-  transform: scale(1.2);
-  cursor: pointer;
-}
-.music-options span {
-  color: var(--ink);
-  font-weight: 500;
-  font-size: 1.05rem;
-  font-family: var(--font-body);
-}
-
-@keyframes fadeSlide{ from{ opacity:0; transform: translateY(14px);} to{ opacity:1; transform:translateY(0);} }
 
 /* ============================================================
    Gift opening screen
@@ -358,7 +317,7 @@ h1,h2,h3{ font-family: var(--font-display); color: var(--deep-rose); }
 }
 
 /* ============================================================
-   Placeholder photo */
+   Placeholder photo (used everywhere a real photo would sit) */
 .ph-photo{
   width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column;
   background: linear-gradient(135deg, var(--baby-pink), var(--rose-pink));
@@ -399,6 +358,19 @@ h1,h2,h3{ font-family: var(--font-display); color: var(--deep-rose); }
 .lightbox-prev{ left: 4%; } .lightbox-next{ right:4%; }
 .lightbox-close{ position:absolute; top: 26px; right: 4%; font-size:1.8rem; color:var(--white); }
 
+/* Memory cards */
+.memory-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 22px; max-width: 1100px; margin: 0 auto;
+}
+.memory-card{
+  background: var(--white); border-radius: var(--radius-md); padding: 30px 24px; text-align:center;
+  box-shadow: var(--shadow-soft); transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.memory-card:hover{ transform: translateY(-8px) rotate(-1deg); box-shadow: var(--shadow-hover); }
+.memory-card .icon{ font-size: 2rem; margin-bottom: 12px; }
+.memory-card h3{ font-size: 1.4rem; margin-bottom: 6px; }
+.memory-card p{ font-size: 0.85rem; color: var(--ink-soft); }
+
 /* ============================================================
    Love Letter — envelope
    ============================================================ */
@@ -438,6 +410,32 @@ h1,h2,h3{ font-family: var(--font-display); color: var(--deep-rose); }
 .hidden-letter-trigger:hover{ color: var(--rose-pink); border-color: var(--rose-pink); }
 
 /* ============================================================
+   Reasons I love you — animated cards
+   ============================================================ */
+.reasons-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 20px; max-width: 1000px; margin: 0 auto;
+}
+.reason-card{
+  background: linear-gradient(155deg, var(--white), var(--light-peach));
+  border: 1px solid rgba(255,77,141,0.15);
+  border-radius: var(--radius-md); padding: 26px 20px; text-align:center;
+  transition: transform 0.35s ease;
+}
+.reason-card:hover{ transform: translateY(-8px) scale(1.03); }
+.reason-card .heart-icon{ font-size:1.6rem; color: var(--rose-pink); margin-bottom:10px; display:block; }
+
+/* Quote carousel */
+.quote-carousel{ max-width: 680px; margin: 0 auto; text-align:center; position:relative; }
+.quote-slide{
+  display:none; font-family: var(--font-display); font-size: clamp(1.6rem, 4vw, 2.2rem); color: var(--deep-rose); line-height:1.5;
+}
+.quote-slide.active{ display:block; animation: fadeSlide 0.6s ease; }
+@keyframes fadeSlide{ from{ opacity:0; transform: translateY(14px);} to{ opacity:1; transform:translateY(0);} }
+.quote-dots{ display:flex; justify-content:center; gap:8px; margin-top: 26px; }
+.quote-dot{ width:8px; height:8px; border-radius:50%; background: rgba(255,77,141,0.3); transition: background 0.3s ease, transform 0.3s ease; }
+.quote-dot.active{ background: var(--rose-pink); transform: scale(1.3); }
+
+/* ============================================================
    Live timer
    ============================================================ */
 .timer-section{ text-align:center; }
@@ -448,6 +446,21 @@ h1,h2,h3{ font-family: var(--font-display); color: var(--deep-rose); }
 }
 .timer-box b{ display:block; font-size: 2.1rem; color: var(--rose-pink); font-family: var(--font-display); }
 .timer-box span{ font-size:0.68rem; text-transform:uppercase; letter-spacing:1px; color: var(--ink-soft); }
+
+/* Future dreams */
+.dreams-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 18px; max-width: 900px; margin:0 auto;
+}
+.dream-item{
+  display:flex; align-items:center; gap: 14px; background: var(--white); padding: 18px 20px; border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-soft);
+}
+.dream-check{
+  width: 26px; height:26px; border-radius:50%; border: 2px solid var(--rose-pink); flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; color: var(--white); font-size:0.8rem;
+  background: var(--rose-pink);
+}
+.dream-item span{ font-size: 0.92rem; }
 
 /* Music player */
 .music-fab{
@@ -478,7 +491,7 @@ h1,h2,h3{ font-family: var(--font-display); color: var(--deep-rose); }
 /* Confetti canvas */
 #confetti-canvas{ position:fixed; inset:0; pointer-events:none; z-index: 300; }
 
-/* Popups */
+/* Secret popup */
 .popup-overlay{
   position:fixed; inset:0; background: rgba(74,32,54,0.55); z-index: 250;
   display:flex; align-items:center; justify-content:center; opacity:0; visibility:hidden;
@@ -495,5 +508,14 @@ h1,h2,h3{ font-family: var(--font-display); color: var(--deep-rose); }
 .popup-close{
   padding: 12px 30px; background: var(--rose-pink); color:var(--white); border-radius: 50px; font-weight:600; font-size:0.85rem;
 }
+
+/* Random memory banner */
+.random-memory-banner{
+  position:fixed; top: 84px; left:50%; transform: translateX(-50%) translateY(-30px); z-index: 58;
+  background: var(--white); padding: 12px 22px; border-radius: 50px; box-shadow: var(--shadow-soft);
+  font-size: 0.82rem; opacity:0; transition: opacity 0.5s ease, transform 0.5s ease; display:flex; gap:10px; align-items:center;
+  pointer-events:none;
+}
+.random-memory-banner.show{ opacity:1; transform: translateX(-50%) translateY(0); }
 
 footer{ text-align:center; padding: 40px 24px; font-size:0.78rem; color: var(--ink-soft); background: var(--light-peach); }
