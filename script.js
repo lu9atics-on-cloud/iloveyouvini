@@ -331,17 +331,6 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight' && lbNext) lbNext.click();
 });
 
-/* ---------------- Build: Reasons I love you ---------------- */
-const reasonsGrid = document.getElementById('reasonsGrid');
-if (reasonsGrid) {
-  REASONS.forEach(r => {
-    const div = document.createElement('div');
-    div.className = 'reason-card reveal-scale';
-    div.innerHTML = `<span class="heart-icon">❤</span><p>${r}</p>`;
-    reasonsGrid.appendChild(div);
-    revealObserver.observe(div);
-  });
-}
 
 /* ---------------- Quote carousel ---------------- */
 const quoteSlides = document.querySelectorAll('.quote-slide');
