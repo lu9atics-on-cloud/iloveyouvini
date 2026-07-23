@@ -1,7 +1,6 @@
 /* ============================================================
    Happy First Anniversary — Aman ❤ Vini
    All interactive behaviour lives here.
-   Edit the CONTENT block below with your own dates, names & words.
    ============================================================ */
 
 /* ============================ CONTENT ============================ */
@@ -16,53 +15,47 @@ const TIMELINE = [
   { title: 'First Trek',         photo: 'FirstTrek.jpeg',    text: 'Three hundred and sixty five days later, and I\'d choose you in every single one of them again.' },
 ];
 
-// All gallery media, in the order they should appear. Videos (.mp4) and photos (.jpeg) can be mixed freely.
 const GALLERY_PHOTOS = [
   'FirstMeet.mp4', 'FirstConvo.jpeg', 'FirstDate.mp4', 'FirstSelfie.jpeg', 'FirstBeach.jpeg', 'FirstTrek.jpeg',
   'YourBday.mp4', 'RandomVdo.mp4',
   'RandomPhoto1.jpeg', 'RandomPhoto2.jpeg', 'RandomPhoto3.jpeg', 'RandomPhoto4.jpeg', 'RandomPhoto5.jpeg',
   'RandomPhoto6.jpeg', 'RandomPhoto7.jpeg', 'RandomPhoto8.jpeg', 'RandomPhoto9.jpeg', 'RandomPhoto10.jpeg',
-  'RandomPhoto11.jpeg', 'RandomPhoto12.jpeg', 'RandomPhoto13.jpeg', 'RandomPhoto14.jpeg', 'RandomPhoto15.jpeg',
-  'RandomPhoto16.jpeg', 'RandomPhoto17.jpeg', 'RandomPhoto18.jpeg', 'RandomPhoto19.jpeg', 'RandomPhoto20.jpeg',
 ];
 
-// Any filename ending in a video extension is treated as a video everywhere below.
 function isVideo(filename) { return /\.(mp4|mov|webm)$/i.test(filename); }
-
-const MEMORIES = [
-  { icon:'😊', title:'Your Smile',        text:'The first thing I fell for, and still my favorite thing to see.' },
-  { icon:'🏡', title:'My Favorite Place',  text:'Wherever you are — that\'s the place I want to be.' },
-  { icon:'📞', title:'Late Night Calls',   text:'Falling asleep to your voice, every single time.' },
-  { icon:'🤳', title:'Our Selfies',        text:'A thousand tiny proofs that we were happy, together.' },
-  { icon:'😂', title:'Your Laugh',         text:'Still the best sound I know.' },
-  { icon:'👀', title:'Your Eyes',          text:'Where I always find my way back home.' },
-];
-
-const REASONS = [
-  'Your Smile', 'Your Kindness', 'Your Care', 'Your Voice', 'Your Support', 'Your Love',
-];
-
-const DREAMS = [
-  'Travel Together', 'Movie Nights', 'New Memories', 'Grow Old Together',
-];
 
 const LETTER_TEXT = "Happy Anniversary, Vini. ❤️ One year ago, neither of us truly knew what the future would look like. We just took a chance on each other, and looking back now, I realize that was the best decision I've ever made. You didn't just become my girlfriend—you became the person I want to tell everything to, the first name that comes to my mind when something good happens, and the only place where my heart feels completely at peace. You've seen me at my happiest, my weakest, my most stubborn, and my most uncertain, yet you stayed. You loved me through every version of me, and I'll spend my whole life being grateful for that. Every laugh, every late-night conversation, every hug, every 'I miss you,' and every memory we've created has become part of my favorite story—our story. If I had to live this life a thousand times, I'd still choose you every single time. Thank you for loving me, believing in me, and making every ordinary day feel extraordinary. This is only our first anniversary, but I know it's just the beginning of a lifetime of memories, adventures, and dreams together. I don't promise a perfect life, but I promise you'll never have to question where my heart belongs. It has always been yours, and it always will be. I love you today, tomorrow, and every tomorrow after that. Happy First Anniversary, my Vini. Always you. Forever us. ❤️";
 const SECRET_MESSAGE = "You found it. Five taps of the heart, just to reach five more words: I love you more today.";
 /* ============================ END CONTENT ============================ */
 
 
-/* ---------------- Loader ---------------- */
+/* ---------------- Loader & Music Selection ---------------- */
 window.addEventListener('load', () => {
+  // Wait for the progress bar animation (3s) to finish, then show the music selector
   setTimeout(() => {
-    document.getElementById('loader').classList.add('hidden');
-  }, 10000);
+    document.getElementById('loader-progress').style.display = 'none';
+    const musicSelection = document.getElementById('music-selection');
+    musicSelection.style.display = 'flex';
+  }, 3500); 
+});
+
+const confirmMusicBtn = document.getElementById('confirmMusicBtn');
+const bgAudio = document.getElementById('bgAudio');
+
+confirmMusicBtn.addEventListener('click', () => {
+  // Get the selected song and set it to the audio player
+  const selectedMusic = document.querySelector('input[name="bg-music"]:checked').value;
+  bgAudio.src = selectedMusic;
+  
+  // Hide loader and show gift screen
+  document.getElementById('loader').classList.add('hidden');
+  playSound('click');
 });
 
 /* ---------------- Gift opening ---------------- */
 const giftScreen = document.getElementById('gift-screen');
 const giftBox = document.getElementById('giftBox');
 const openGiftBtn = document.getElementById('openGiftBtn');
-const bgAudio = document.getElementById('bgAudio');
 
 openGiftBtn.addEventListener('click', () => {
   giftBox.classList.add('opening');
@@ -71,14 +64,14 @@ openGiftBtn.addEventListener('click', () => {
   setTimeout(() => {
     giftScreen.classList.add('hidden');
     document.getElementById('navbar').classList.add('show');
-    // try to start music after this real user gesture
+    // start music after real user gesture
     bgAudio.volume = 0.5;
     bgAudio.play().catch(() => {});
     updateMusicIcon();
   }, 650);
 }, { once: true });
 
-/* ---------------- Navbar: scroll + active link + mobile menu ---------------- */
+/* ---------------- Navbar ---------------- */
 const navbar = document.getElementById('navbar');
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
@@ -103,7 +96,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal, .reveal-scale').forEach(el => revealObserver.observe(el));
 
-/* ---------------- Ambient floating hearts / petals / sparkles ---------------- */
+/* ---------------- Ambient floating layers ---------------- */
 const ambientLayer = document.getElementById('ambientLayer');
 const AMBIENT_SYMBOLS = ['❤','🌸','✨','💗'];
 function spawnFloatie() {
@@ -152,7 +145,7 @@ document.addEventListener('mousemove', (e) => {
   setTimeout(() => heart.remove(), 900);
 });
 
-/* ---------------- Sound effects (tiny synthesized blips, no external files needed) ---------------- */
+/* ---------------- Sound effects ---------------- */
 let audioCtx;
 function playSound(kind) {
   try {
@@ -238,53 +231,6 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight') document.getElementById('lightboxNext').click();
 });
 
-/* ---------------- Build: Memory cards ---------------- */
-const memoryGrid = document.getElementById('memoryGrid');
-MEMORIES.forEach(m => {
-  const div = document.createElement('div');
-  div.className = 'memory-card reveal-scale';
-  div.innerHTML = `<div class="icon">${m.icon}</div><h3>${m.title}</h3><p>${m.text}</p>`;
-  memoryGrid.appendChild(div);
-  revealObserver.observe(div);
-});
-
-/* ---------------- Build: Reasons I love you ---------------- */
-const reasonsGrid = document.getElementById('reasonsGrid');
-REASONS.forEach(r => {
-  const div = document.createElement('div');
-  div.className = 'reason-card reveal-scale';
-  div.innerHTML = `<span class="heart-icon">❤</span><h3 style="font-size:1.15rem;font-family:var(--font-body);font-weight:600;color:var(--ink);">${r}</h3>`;
-  reasonsGrid.appendChild(div);
-  revealObserver.observe(div);
-});
-
-/* ---------------- Build: Future dreams ---------------- */
-const dreamsGrid = document.getElementById('dreamsGrid');
-DREAMS.forEach(d => {
-  const div = document.createElement('div');
-  div.className = 'dream-item reveal';
-  div.innerHTML = `<div class="dream-check">✓</div><span>${d}</span>`;
-  dreamsGrid.appendChild(div);
-  revealObserver.observe(div);
-});
-
-/* ---------------- Quote carousel ---------------- */
-const quoteSlides = document.querySelectorAll('.quote-slide');
-const quoteDotsWrap = document.getElementById('quoteDots');
-quoteSlides.forEach((_, i) => {
-  const dot = document.createElement('div');
-  dot.className = 'quote-dot' + (i === 0 ? ' active' : '');
-  dot.addEventListener('click', () => showQuote(i));
-  quoteDotsWrap.appendChild(dot);
-});
-let quoteIndex = 0;
-function showQuote(i) {
-  quoteIndex = i;
-  quoteSlides.forEach((s, idx) => s.classList.toggle('active', idx === i));
-  quoteDotsWrap.querySelectorAll('.quote-dot').forEach((d, idx) => d.classList.toggle('active', idx === i));
-}
-setInterval(() => showQuote((quoteIndex + 1) % quoteSlides.length), 4500);
-
 /* ---------------- Envelope + typewriter letter ---------------- */
 const envelope = document.getElementById('envelope');
 const letterPaper = document.getElementById('letterPaper');
@@ -311,7 +257,6 @@ function typewriteInto(el, text, speed = 28) {
   }, speed);
 }
 
-/* Hidden "open when you're sad" letter */
 document.getElementById('hiddenLetterTrigger').addEventListener('click', () => openPopup('sadLetterPopup'));
 
 /* ---------------- Live relationship timer ---------------- */
@@ -390,18 +335,6 @@ document.querySelectorAll('.popup-close').forEach(btn => {
 document.querySelectorAll('.popup-overlay').forEach(ov => {
   ov.addEventListener('click', (e) => { if (e.target === ov) ov.classList.remove('open'); });
 });
-
-/* ---------------- Random memory each load ---------------- */
-(function showRandomMemory() {
-  const banner = document.getElementById('randomMemoryBanner');
-  const text = document.getElementById('randomMemoryText');
-  const pick = MEMORIES[Math.floor(Math.random() * MEMORIES.length)];
-  text.textContent = `Remember: ${pick.title}`;
-  setTimeout(() => {
-    banner.classList.add('show');
-    setTimeout(() => banner.classList.remove('show'), 4000);
-  }, 4200);
-})();
 
 /* ---------------- Confetti ---------------- */
 const confettiCanvas = document.getElementById('confetti-canvas');
