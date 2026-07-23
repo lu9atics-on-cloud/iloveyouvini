@@ -291,52 +291,183 @@ h1,h2,h3{ font-family: var(--font-display); color: var(--gold); font-weight: 600
 .reveal-scale.in{ opacity:1; transform: scale(1); }
 
 /* ============================================================
-   Our Story — timeline
-   ============================================================ */
-.timeline{ max-width: 900px; margin: 0 auto; position:relative; }
-.timeline::before{
-  content:''; position:absolute; left:50%; top:0; bottom:0; width:1px; transform: translateX(-50%);
-  background: linear-gradient(var(--crimson-red), transparent);
-}
-.tl-item{ display:flex; justify-content: center; width:100%; margin-bottom: 60px; position:relative; }
-.tl-item:nth-child(odd) .tl-card{ margin-right: auto; text-align:right; }
-.tl-item:nth-child(even) .tl-card{ margin-left: auto; text-align:left; }
-.tl-card{
-  background: var(--bg-panel); width: 44%; padding: 28px; border-radius: var(--radius-md);
-  box-shadow: var(--shadow-soft); border: 1px solid rgba(255,255,255,0.03);
-  position:relative; transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.tl-card:hover{ transform: translateY(-6px); box-shadow: var(--shadow-hover); border-color: rgba(209,0,32,0.2); }
-.tl-dot{
-  position:absolute; left:50%; top: 34px; width: 14px; height:14px; border-radius:50%;
-  background: var(--blood-red); transform: translateX(-50%); box-shadow: 0 0 15px var(--blood-red);
-}
-.tl-photo{
-  width:100%; aspect-ratio: 4/3; border-radius: var(--radius-sm); margin-bottom: 14px; overflow:hidden;
-}
-.tl-photo img{ width:100%; height:100%; object-fit:cover; display:block; filter: brightness(0.85) contrast(1.1); transition: 0.4s ease; }
-.tl-card:hover .tl-photo img{ filter: brightness(1) contrast(1.1); }
-.tl-card h3{ font-size: 1.5rem; margin-bottom: 6px; color: var(--gold); }
-.tl-card p{ font-size: 0.95rem; color: var(--text-muted); line-height:1.7; }
-@media (max-width: 760px){
-  .timeline::before{ left: 22px; }
-  .tl-item, .tl-item:nth-child(odd), .tl-item:nth-child(even){ justify-content:flex-start; padding-left: 50px; }
-  .tl-item:nth-child(odd) .tl-card, .tl-item:nth-child(even) .tl-card{ width:100%; text-align:left; margin:0; }
-  .tl-dot{ left: 22px; }
+   /* ============================================================
+   Our Story — Timeline
+============================================================ */
+
+.timeline{
+    max-width:1200px;
+    margin:0 auto;
+    position:relative;
 }
 
+.timeline::before{
+    content:'';
+    position:absolute;
+    left:50%;
+    top:0;
+    bottom:0;
+    width:2px;
+    transform:translateX(-50%);
+    background:linear-gradient(var(--crimson-red), transparent);
+}
+
+.tl-item{
+    display:flex;
+    justify-content:center;
+    width:100%;
+    margin-bottom:80px;
+    position:relative;
+}
+
+.tl-item:nth-child(odd) .tl-card{
+    margin-right:auto;
+    text-align:right;
+}
+
+.tl-item:nth-child(even) .tl-card{
+    margin-left:auto;
+    text-align:left;
+}
+
+.tl-card{
+    background:var(--bg-panel);
+    width:46%;
+    padding:28px;
+    border-radius:var(--radius-md);
+    border:1px solid rgba(255,255,255,.05);
+    box-shadow:var(--shadow-soft);
+    position:relative;
+    transition:.35s ease;
+}
+
+.tl-card:hover{
+    transform:translateY(-8px);
+    box-shadow:var(--shadow-hover);
+    border-color:rgba(209,0,32,.25);
+}
+
+.tl-dot{
+    position:absolute;
+    left:50%;
+    top:36px;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    transform:translateX(-50%);
+    background:var(--blood-red);
+    box-shadow:0 0 18px var(--blood-red);
+}
+
+/* ===========================
+   Portrait Image (1080×1920)
+=========================== */
+
+.tl-photo{
+    width:100%;
+    aspect-ratio:9 / 16;
+    border-radius:16px;
+    overflow:hidden;
+    background:#111;
+    margin-bottom:18px;
+}
+
+.tl-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    display:block;
+    filter:brightness(.9) contrast(1.05);
+    transition:transform .5s ease, filter .5s ease;
+}
+
+.tl-card:hover .tl-photo img{
+    transform:scale(1.05);
+    filter:brightness(1) contrast(1.08);
+}
+
+.tl-card h3{
+    font-size:1.6rem;
+    margin-bottom:10px;
+    color:var(--gold);
+}
+
+.tl-card p{
+    font-size:1rem;
+    line-height:1.8;
+    color:var(--text-muted);
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media (max-width:760px){
+
+    .timeline::before{
+        left:24px;
+    }
+
+    .tl-item{
+        justify-content:flex-start;
+        padding-left:55px;
+        margin-bottom:60px;
+    }
+
+    .tl-item:nth-child(odd) .tl-card,
+    .tl-item:nth-child(even) .tl-card{
+        width:100%;
+        max-width:420px;
+        margin:0;
+        text-align:left;
+    }
+
+    .tl-dot{
+        left:24px;
+    }
+
+    .tl-photo{
+        aspect-ratio:9/16;
+    }
+}
 /* ============================================================
-   Placeholder photo */
+  /* Placeholder Photo (9:16 Portrait) */
 .ph-photo{
-  width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column;
-  background: linear-gradient(135deg, #1f0b11, #140407);
-  color: var(--text-muted); font-size: 1.6rem; position:relative; overflow:hidden;
+    width:100%;
+    height:100%;
+    aspect-ratio:9 / 16;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    background:linear-gradient(135deg,#1f0b11,#140407);
+    color:var(--text-muted);
+    font-size:1.6rem;
+    position:relative;
+    overflow:hidden;
+    border-radius:16px;
 }
+
 .ph-photo::after{
-  content:''; position:absolute; inset:0;
-  background: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 10px, transparent 10px 20px);
+    content:'';
+    position:absolute;
+    inset:0;
+    background:repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,.02) 0 10px,
+        transparent 10px 20px
+    );
 }
-.ph-photo small{ font-family: var(--font-body); font-size: 0.6rem; letter-spacing:2px; margin-top:6px; opacity:0.6; text-transform:uppercase; }
+
+.ph-photo small{
+    font-family:var(--font-body);
+    font-size:.7rem;
+    letter-spacing:2px;
+    margin-top:8px;
+    opacity:.6;
+    text-transform:uppercase;
+}
 
 /* ============================================================
    Gallery & Memories
