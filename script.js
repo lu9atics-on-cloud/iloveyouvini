@@ -8,14 +8,15 @@
 const START_DATE = new Date('2025-07-25T00:00:00'); // <-- set your real "together since" date/time here
 
 const TIMELINE = [
-  { title: 'First Meeting',     photo: 'FirstMeet.mp4',     text: 'The day our paths crossed for the very first time, without either of ' },
-  { title: 'First Conversation', photo: 'FirstConvo.jpeg',   text: 'Hours felt like minutes. We talked about everything and nothing, and ' },
-  { title: 'First Conversation', photo: 'FirstConvo.jpeg',   text: 'Hours felt like minutes. We talked about everything and nothing, and ' },
-  { title: 'First Date',        photo: 'FirstDate.mp4',     text: 'Nervous hands, shy smiles, and a night I still remember in perfect de' },
-  { title: 'First Selfie',      photo: 'FirstSelfie.jpeg',  text: 'Proof that even our silliest, unplanned moments turned into memories ' },
-  { title: 'First Beach Visit', photo: 'FirstBeach.jpeg',   text: 'New places, same us - that\'s when I knew home wasn\'t a place, it wa' },
-  { title: 'First Conversation', photo: 'FirstConvo.jpeg',   text: 'Hours felt like minutes. We talked about everything and nothing, and ' },
-  { title: 'First Trek',        photo: 'FirstTrek.jpeg',    text: 'Three hundred and sixty five days later, and I\'d choose you in every ' }
+  { title: 'The First Hello',     photo: 'FirstMeet.mp4',     text: 'The day our paths crossed for the very first time, without either of ' },
+  { title: 'The First Meet', photo: 'FirstConvo.jpeg',   text: 'Hours felt like minutes. We talked about everything and nothing, and ' },
+  { title: 'First Selfie',        photo: 'FirstDate.mp4',     text: 'Nervous hands, shy smiles, and a night I still remember in perfect de' },
+  { title: 'First Date', photo: 'FirstConvo.jpeg',   text: 'Hours felt like minutes. We talked about everything and nothing, and ' },
+  { title: 'We and Our fav spot',      photo: 'FirstSelfie.jpeg',  text: 'Proof that even our silliest, unplanned moments turned into memories ' },
+  { title: 'First Outing', photo: 'FirstBeach.jpeg',   text: 'New places, same us - that\'s when I knew home wasn\'t a place, it wa' },
+  { title: 'The Proposal', photo: 'FirstConvo.jpeg',   text: 'Hours felt like minutes. We talked about everything and nothing, and ' },
+  { title: 'The Acceptance',        photo: 'FirstDate.mp4',     text: 'Nervous hands, shy smiles, and a night I still remember in perfect de' },
+  { title: 'We',        photo: 'FirstTrek.jpeg',    text: 'Three hundred and sixty five days later, and I\'d choose you in every ' }
 ];
 
 // All gallery media, in the order they should appear. Videos (.mp4) and photos (.jpeg) can be mixed freely.
