@@ -5,69 +5,15 @@
    ============================================================ */
 
 /* ============================ CONTENT ============================ */
-const START_DATE = new Date('2025-07-25T00:00:00'); // <--- set your real "together since" date/time here
+const START_DATE = new Date('2025-07-25T00:00:00'); // <-- set your real "together since" date/time here
 
 const TIMELINE = [
-  { 
-    date: 'DD Month YYYY', 
-    title: 'First Text', 
-    photo: 'FirstText.jpeg', 
-    text: 'The tiny notification that changed everything. A simple message that started a lifetime of conversations.' 
-  },
-  { 
-    date: 'DD Month YYYY', 
-    title: 'First Meeting', , 
-    photo: 'FirstMeet.mp4', 
-    text: 'The day our paths crossed for the very first time, and the world suddenly felt a little brighter.' 
-  },
-  { 
-    date: 'DD Month YYYY', 
-    title: 'First Outing', 
-    photo: 'FirstOuting.jpeg', 
-    text: 'Stepping out together into the real world, stealing glances and laughing at nothing at all.' 
-  },
-  { 
-    date: 'DD Month YYYY', 
-    title: 'First time I expressed my feelings', 
-    photo: 'FirstExpression.jpeg', 
-    text: 'My heart racing against my ribs as I finally gathered the courage to tell you how deeply I adore you.' 
-  },
-  { 
-    date: 'DD Month YYYY', 
-    title: 'You said yes', 
-    photo: 'YouSaidYes.jpeg', 
-    text: 'The exact moment time stood still. The sweetest word I have ever heard, turning all my dreams into reality.' 
-  },
-  { 
-    date: 'DD Month YYYY', 
-    title: 'Our mall trips', 
-    photo: 'MallTrips.jpeg', 
-    text: 'Endless walking, silly window shopping, sharing food court snacks, and just loving being close to you.' 
-  },
-  { 
-    date: 'DD Month YYYY', 
-    title: 'Our beaches trips', 
-    photo: 'BeachTrips.jpeg', 
-    text: 'Cool evening breezes, footprints washed away by the waves, and holding hands while looking at the horizon.' 
-  },
-  { 
-    date: 'DD Month YYYY', 
-    title: 'Treks', 
-    photo: 'Treks.jpeg', 
-    text: 'Steep climbs and tired legs, but every hard step was completely worth it for the view at the top with you.' 
-  },
-  { 
-    date: 'DD Month YYYY', 
-    title: 'Foods we had together', 
-    photo: 'FoodTogether.jpeg', 
-    text: 'From fancy dinners to messy street bites, everything tastes infinitely better when shared off your plate.' 
-  },
-  { 
-    date: 'DD Month YYYY', 
-    title: 'You and Me', 
-    photo: 'YouAndMe.jpeg', 
-    text: 'Three hundred and sixty-five days later, through every chapter and memory — I would choose you in every lifetime.' 
-  }
+  { title: 'First Meeting',     photo: 'FirstMeet.mp4',     text: 'The day our paths crossed for the very first time, without either of ' },
+  { title: 'First Conversation', photo: 'FirstConvo.jpeg',   text: 'Hours felt like minutes. We talked about everything and nothing, and ' },
+  { title: 'First Date',        photo: 'FirstDate.mp4',     text: 'Nervous hands, shy smiles, and a night I still remember in perfect de' },
+  { title: 'First Selfie',      photo: 'FirstSelfie.jpeg',  text: 'Proof that even our silliest, unplanned moments turned into memories ' },
+  { title: 'First Beach Visit', photo: 'FirstBeach.jpeg',   text: 'New places, same us - that\'s when I knew home wasn\'t a place, it wa' },
+  { title: 'First Trek',        photo: 'FirstTrek.jpeg',    text: 'Three hundred and sixty five days later, and I\'d choose you in every ' }
 ];
 
 // All gallery media, in the order they should appear. Videos (.mp4) and photos (.jpeg) can be mixed freely.
