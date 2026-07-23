@@ -39,17 +39,19 @@ window.addEventListener('load', () => {
   }, 3500); 
 });
 
-const confirmMusicBtn = document.getElementById('confirmMusicBtn');
 const bgAudio = document.getElementById('bgAudio');
+const musicRadios = document.querySelectorAll('input[name="bg-music"]');
 
-confirmMusicBtn.addEventListener('click', () => {
-  // Get the selected song and set it to the audio player
-  const selectedMusic = document.querySelector('input[name="bg-music"]:checked').value;
-  bgAudio.src = selectedMusic;
-  
-  // Hide loader and show gift screen
-  document.getElementById('loader').classList.add('hidden');
-  playSound('click');
+// Auto-advance as soon as she selects a song
+musicRadios.forEach(radio => {
+  radio.addEventListener('change', (e) => {
+    // Set the selected song to the audio player
+    bgAudio.src = e.target.value;
+    
+    // Hide loader and show gift screen
+    document.getElementById('loader').classList.add('hidden');
+    playSound('click');
+  });
 });
 
 /* ---------------- Gift opening ---------------- */
