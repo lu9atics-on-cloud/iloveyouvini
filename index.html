@@ -14,28 +14,13 @@
 <div class="bg-blur-circle" style="width:400px;height:400px;top:10%;left:-8%;"></div>
 <div class="bg-blur-circle" style="width:300px;height:300px;bottom:5%;right:-6%;"></div>
 
-<!-- ================= LOADER & MUSIC SELECTION ================= -->
+<!-- ================= LOADER ================= -->
 <div id="loader">
   <div class="loader-heart">❤</div>
   <div class="loader-text">You’re not easy-going, but you’re passionate, and that’s good. And when you get upset about the little things, I think that I’m pretty good about making you feel better about that. And that’s good too. So, they can say that you’re high maintenance, but it’s okay, because I like…maintaining you.</div>
-  
-  <!-- Loading Bar (JS can hide this once loaded) -->
-  <div id="loader-progress">
-    <div class="loader-sub">Please wait</div>
-    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
-  </div>
-
-  <!-- Music Selection (JS can show this after loading is complete) -->
-  <div id="music-selection" class="music-selection-wrap" style="display: none; margin-top: 30px;">
-    <h3 class="music-title" style="font-family: 'Great Vibes', cursive; font-size: 2.2rem; margin-bottom: 15px;">Pick our vibe for today 🎵</h3>
-    <div class="music-options" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; font-size: 1.1rem;">
-      <label><input type="radio" name="bg-music" value="assets/music/song1.mp3"> <span>Song Title 1</span></label>
-      <label><input type="radio" name="bg-music" value="assets/music/song2.mp3"> <span>Song Title 2</span></label>
-      <label><input type="radio" name="bg-music" value="assets/music/song3.mp3"> <span>Song Title 3</span></label>
-      <label><input type="radio" name="bg-music" value="assets/music/song4.mp3"> <span>Song Title 4</span></label>
-      <label><input type="radio" name="bg-music" value="assets/music/Jhol.mp3"> <span>Jhol - Coke Studio</span></label>
-    </div>
-  </div>
+  <div class="loader-sub">Please wait</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
 
 <!-- ================= GIFT OPENING ================= -->
 <div id="gift-screen">
@@ -101,8 +86,16 @@
   <span class="lightbox-nav lightbox-next" id="lightboxNext">›</span>
 </div>
 
+<!-- ================= MEMORY CARDS ================= -->
+<section>
+  <span class="section-kicker">Our memories</span>
+  <h2 class="section-title reveal">Favorite Moments</h2>
+  <p class="section-sub reveal">The little things that made this year unforgettable.</p>
+  <div class="memory-grid" id="memoryGrid"></div>
+</section>
+
 <!-- ================= LOVE LETTER ================= -->
-<section id="letter">
+<section id="letter" style="background:var(--white);">
   <span class="section-kicker">From my heart</span>
   <h2 class="section-title reveal">Love Letter</h2>
   <div class="letter-wrap reveal">
@@ -119,8 +112,28 @@
   </div>
 </section>
 
+<!-- ================= REASONS I LOVE YOU ================= -->
+<section>
+  <span class="section-kicker">A few of many</span>
+  <h2 class="section-title reveal">Reasons I Love You</h2>
+  <div class="reasons-grid" id="reasonsGrid"></div>
+</section>
+
+<!-- ================= QUOTES ================= -->
+<section style="background:var(--white);">
+  <span class="section-kicker">In other words</span>
+  <h2 class="section-title reveal">Favorite Quotes</h2>
+  <div class="quote-carousel">
+    <div class="quote-slide active">"Every love story is beautiful, but ours is my favorite."</div>
+    <div class="quote-slide">"In your smile, I found my home."</div>
+    <div class="quote-slide">"One year with you feels like one perfect moment, stretched forever."</div>
+    <div class="quote-slide">"You are my today, and all of my tomorrows."</div>
+    <div class="quote-dots" id="quoteDots"></div>
+  </div>
+</section>
+
 <!-- ================= LIVE TIMER ================= -->
-<section class="timer-section" id="timer-section" style="background:var(--white);">
+<section class="timer-section" id="timer-section">
   <span class="section-kicker">Every second counts</span>
   <h2 class="section-title reveal">Together Since</h2>
   <p class="section-sub reveal" style="margin-bottom:10px;">25 July <code>2026</code> </p>
@@ -132,6 +145,13 @@
     <div class="timer-box"><b id="t-mins">00</b><span>Minutes</span></div>
     <div class="timer-box"><b id="t-secs">00</b><span>Seconds</span></div>
   </div>
+</section>
+
+<!-- ================= FUTURE DREAMS ================= -->
+<section style="background:var(--white);">
+  <span class="section-kicker">What's next</span>
+  <h2 class="section-title reveal">Future Dreams</h2>
+  <div class="dreams-grid" id="dreamsGrid"></div>
 </section>
 
 <!-- ================= FINAL SURPRISE ================= -->
@@ -150,13 +170,13 @@
   <div class="final-sign">Forever Yours,<br>Aman ❤</div>
 </section>
 
-<footer>Made with ❤ for Vini, by Aman — 2026</footer>
+<footer>Made with ❤ for Vini, by Aman — {YEAR}</footer>
 
 <!-- ================= MUSIC PLAYER ================= -->
 <button class="music-fab" id="musicFab" aria-label="Play music">🎵</button>
-<!-- Default track can be set here, but JS will update the src based on selection -->
-<audio id="bgAudio" src="" loop preload="none"></audio>
+<audio id="bgAudio" src="assets/music/Jhol.mp3" loop preload="none"></audio>
 
+  
 <!-- ================= SECRET / HIDDEN POPUPS ================= -->
 <div class="popup-overlay" id="secretPopup">
   <div class="popup-card">
