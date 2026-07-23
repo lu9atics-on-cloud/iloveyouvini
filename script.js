@@ -10,39 +10,79 @@ const START_DATE = new Date('2025-07-25T00:00:00'); // <-- set your real "togeth
 const TIMELINE = [
   {
     title: 'The First Hello',
-    photo: 'The First Hello.jpeg',
+    photo: 'TheFirstHello.jpeg',
     text: 'The day our paths crossed for the very first time, without either of us knowing how special this journey would become.'
   },
   {
     title: 'First Meet',
-    photo: 'The First Meet.jpeg',
+    photo: 'TheFirstMeet.jpeg',
     text: 'Seeing you in person for the first time felt unreal. That moment still lives in my heart.'
   },
   {
     title: 'First Date',
-    photo: 'First Date.jpeg',
+    photo: 'FirstDate.jpeg',
     text: 'Nervous smiles, endless conversations, and a day that became one of my favorite memories forever.'
   },
   {
     title: 'First Outing',
-    photo: 'First Outing.mp4',
+    photo: 'FirstOuting.mp4',
     text: 'Every step we took together made me realize that life feels brighter when you are beside me.'
   },
   {
     title: 'Our Favorite Spot',
-    photo: 'We and Our fav spot.jpeg',
+    photo: 'WeandOurfavspot.jpeg',
     text: 'A place that became ours. No matter how many places we visit, this one will always be special.'
   }
 ];
 
 // All gallery media, in the order they should appear. Videos (.mp4) and photos (.jpeg) can be mixed freely.
 const GALLERY_PHOTOS = [
-  'FirstMeet.mp4', 'FirstConvo.jpeg', 'FirstDate.mp4', 'FirstSelfie.jpeg', 'FirstBeach.jpeg', 'FirstTrek.jpeg',
-  'YourBday.mp4', 'RandomVdo.mp4',
-  'RandomPhoto1.jpeg', 'RandomPhoto2.jpeg', 'RandomPhoto3.jpeg', 'RandomPhoto4.jpeg', 'RandomPhoto5.jpeg',
-  'RandomPhoto6.jpeg', 'RandomPhoto7.jpeg', 'RandomPhoto8.jpeg', 'RandomPhoto9.jpeg', 'RandomPhoto10.jpeg',
-  'RandomPhoto11.jpeg', 'RandomPhoto12.jpeg', 'RandomPhoto13.jpeg', 'RandomPhoto14.jpeg', 'RandomPhoto15.jpeg',
-  'RandomPhoto16.jpeg', 'RandomPhoto17.jpeg', 'RandomPhoto18.jpeg', 'RandomPhoto19.jpeg', 'RandomPhoto20.jpeg',
+  'FirstDate.jpeg',
+  'FirstOuting.mp4',
+  'FirstSelfie.jpeg',
+
+  'The First Hello.jpeg',
+  'The First Meet.jpeg',
+  'We and Our fav spot.jpeg',
+  'YourBday.mp4',
+  'RandomVdo.mp4',
+
+  'Random20.jpeg',
+  'Random21.jpeg',
+  'Random22.jpeg',
+  'Random23.jpeg',
+  'Random24.jpeg',
+  'Random25.jpeg',
+  'Random26.jpeg',
+  'Random27.jpeg',
+  'Random28.jpeg',
+  'Random29.jpeg',
+  'Random30.mp4',
+  'Random31.mp4',
+
+  'random41.mp4',
+  'random49.mp4',
+
+  'RandomPhoto1.jpeg',
+  'RandomPhoto2.jpeg',
+  'RandomPhoto3.jpeg',
+  'RandomPhoto4.jpeg',
+  'RandomPhoto5.jpeg',
+  'RandomPhoto6.jpeg',
+  'RandomPhoto7.jpeg',
+  'RandomPhoto8.jpeg',
+  'RandomPhoto9.jpeg',
+  'RandomPhoto10.jpeg',
+  'RandomPhoto11.jpeg',
+  'RandomPhoto12.jpeg',
+  'RandomPhoto13.jpeg',
+  'RandomPhoto14.jpeg',
+  'RandomPhoto15.jpeg',
+  'RandomPhoto16.jpeg',
+  'RandomPhoto17.jpeg',
+  'RandomPhoto18.jpeg',
+  'RandomPhoto19.jpeg',
+  'RandomPhoto20.jpeg'
 ];
 
 // Any filename ending in a video extension is treated as a video everywhere below.
