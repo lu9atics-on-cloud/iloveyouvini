@@ -112,9 +112,12 @@ const SECRET_MESSAGE = "You found it. Five taps of the heart, just to reach five
 
 /* ---------------- Loader ---------------- */
 window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('loader').classList.add('hidden');
-  }, 10000);
+  const loader = document.getElementById('loader');
+  if (loader) {
+    setTimeout(() => {
+      loader.classList.add('hidden');
+    }, 10000);
+  }
 });
 
 /* ---------------- Gift opening ---------------- */
@@ -123,31 +126,39 @@ const giftBox = document.getElementById('giftBox');
 const openGiftBtn = document.getElementById('openGiftBtn');
 const bgAudio = document.getElementById('bgAudio');
 
-openGiftBtn.addEventListener('click', () => {
-  giftBox.classList.add('opening');
-  spawnPetalBurst();
-  playSound('gift');
-  setTimeout(() => {
-    giftScreen.classList.add('hidden');
-    document.getElementById('navbar').classList.add('show');
-    // try to start music after this real user gesture
-    bgAudio.volume = 0.5;
-    bgAudio.play().catch(() => {});
-    updateMusicIcon();
-  }, 650);
-}, { once: true });
+if (openGiftBtn) {
+  openGiftBtn.addEventListener('click', () => {
+    if (giftBox) giftBox.classList.add('opening');
+    spawnPetalBurst();
+    playSound('gift');
+    setTimeout(() => {
+      if (giftScreen) giftScreen.classList.add('hidden');
+      const navbarElem = document.getElementById('navbar');
+      if (navbarElem) navbarElem.classList.add('show');
+      
+      if (bgAudio) {
+        bgAudio.volume = 0.5;
+        bgAudio.play().catch(() => {});
+      }
+      updateMusicIcon();
+    }, 650);
+  }, { once: true });
+}
 
 /* ---------------- Navbar: scroll + active link + mobile menu ---------------- */
 const navbar = document.getElementById('navbar');
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
-navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+}
 
 const sectionIds = ['hero','story','gallery','letter','forever'];
 const navAnchors = document.querySelectorAll('.nav-link');
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 40) navbar.classList.add('show');
+  if (navbar && window.scrollY > 40) navbar.classList.add('show');
   let current = sectionIds[0];
   sectionIds.forEach(id => {
     const el = document.getElementById(id);
@@ -166,6 +177,7 @@ document.querySelectorAll('.reveal, .reveal-scale').forEach(el => revealObserver
 const ambientLayer = document.getElementById('ambientLayer');
 const AMBIENT_SYMBOLS = ['❤','🌸','✨','💗'];
 function spawnFloatie() {
+  if (!ambientLayer) return;
   const el = document.createElement('span');
   el.className = 'floatie';
   el.textContent = AMBIENT_SYMBOLS[Math.floor(Math.random() * AMBIENT_SYMBOLS.length)];
@@ -177,10 +189,13 @@ function spawnFloatie() {
   ambientLayer.appendChild(el);
   setTimeout(() => el.remove(), duration * 1000 + 200);
 }
-setInterval(spawnFloatie, 900);
-for (let i = 0; i < 6; i++) setTimeout(spawnFloatie, i * 300);
+if (ambientLayer) {
+  setInterval(spawnFloatie, 900);
+  for (let i = 0; i < 6; i++) setTimeout(spawnFloatie, i * 300);
+}
 
 function spawnPetalBurst() {
+  if (!ambientLayer) return;
   for (let i = 0; i < 24; i++) {
     setTimeout(() => {
       const el = document.createElement('span');
@@ -211,7 +226,7 @@ document.addEventListener('mousemove', (e) => {
   setTimeout(() => heart.remove(), 900);
 });
 
-/* ---------------- Sound effects (tiny synthesized blips, no external files needed) ---------------- */
+/* ---------------- Sound effects ---------------- */
 let audioCtx;
 function playSound(kind) {
   try {
@@ -234,144 +249,159 @@ document.addEventListener('click', (e) => {
 
 /* ---------------- Build: Timeline ---------------- */
 const timelineEl = document.getElementById('timeline');
-TIMELINE.forEach((item, i) => {
-  const div = document.createElement('div');
-  div.className = 'tl-item reveal';
-  const media = isVideo(item.photo)
-    ? `<video src="assets/photos/${item.photo}" muted loop autoplay playsinline preload="metadata"></video>`
-    : `<img src="assets/photos/${item.photo}" alt="${item.title}" loading="lazy">`;
-  div.innerHTML = `
-    <div class="tl-dot"></div>
-    <div class="tl-card">
-      <div class="tl-photo">${media}</div>
-      <h3>${item.title}</h3>
-      <p>${item.text}</p>
-    </div>`;
-  timelineEl.appendChild(div);
-  revealObserver.observe(div);
-});
+if (timelineEl) {
+  TIMELINE.forEach((item) => {
+    const div = document.createElement('div');
+    div.className = 'tl-item reveal';
+    const media = isVideo(item.photo)
+      ? `<video src="assets/photos/${item.photo}" muted loop autoplay playsinline preload="metadata"></video>`
+      : `<img src="assets/photos/${item.photo}" alt="${item.title}" loading="lazy">`;
+    div.innerHTML = `
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-photo">${media}</div>
+        <h3>${item.title}</h3>
+        <p>${item.text}</p>
+      </div>`;
+    timelineEl.appendChild(div);
+    revealObserver.observe(div);
+  });
+}
 
 /* ---------------- Build: Gallery ---------------- */
 const galleryGrid = document.getElementById('galleryGrid');
 const GALLERY_COUNT = GALLERY_PHOTOS.length;
-GALLERY_PHOTOS.forEach((file, index) => {
-  const div = document.createElement('div');
-  const video = isVideo(file);
-  div.className = 'gallery-item reveal-scale' + (video ? ' video-item' : '');
-  div.innerHTML = video
-    ? `<video class="gallery-image" src="assets/photos/${file}" muted loop playsinline preload="metadata"></video><span class="play-badge">▶</span>`
-    : `<img src="assets/photos/${file}" alt="${file}" class="gallery-image" loading="lazy">`;
-  div.addEventListener('click', () => openLightbox(index));
-  if (video) {
-    const vidEl = div.querySelector('video');
-    div.addEventListener('mouseenter', () => vidEl.play().catch(() => {}));
-    div.addEventListener('mouseleave', () => { vidEl.pause(); vidEl.currentTime = 0; });
-  }
-  galleryGrid.appendChild(div);
-  revealObserver.observe(div);
-});
+if (galleryGrid) {
+  GALLERY_PHOTOS.forEach((file, index) => {
+    const div = document.createElement('div');
+    const video = isVideo(file);
+    div.className = 'gallery-item reveal-scale' + (video ? ' video-item' : '');
+    div.innerHTML = video
+      ? `<video class="gallery-image" src="assets/photos/${file}" muted loop playsinline preload="metadata"></video><span class="play-badge">▶</span>`
+      : `<img src="assets/photos/${file}" alt="${file}" class="gallery-image" loading="lazy">`;
+    div.addEventListener('click', () => openLightbox(index));
+    if (video) {
+      const vidEl = div.querySelector('video');
+      div.addEventListener('mouseenter', () => vidEl.play().catch(() => {}));
+      div.addEventListener('mouseleave', () => { vidEl.pause(); vidEl.currentTime = 0; });
+    }
+    galleryGrid.appendChild(div);
+    revealObserver.observe(div);
+  });
+}
 
 /* ---------------- Lightbox ---------------- */
 const lightbox = document.getElementById('lightbox');
 const lightboxInner = document.getElementById('lightboxInner');
 let currentPhoto = 0;
+
 function renderLightbox() {
+  if (!lightboxInner) return;
   const file = GALLERY_PHOTOS[currentPhoto];
   lightboxInner.innerHTML = isVideo(file)
     ? `<video src="assets/photos/${file}" controls autoplay playsinline style="width:100%;height:100%;object-fit:cover;"></video>`
     : `<img src="assets/photos/${file}" alt="${file}" style="width:100%;height:100%;object-fit:cover;">`;
 }
 function stopLightboxMedia() {
+  if (!lightboxInner) return;
   const v = lightboxInner.querySelector('video');
   if (v) v.pause();
 }
-function openLightbox(i) { currentPhoto = i; renderLightbox(); lightbox.classList.add('open'); }
-document.getElementById('lightboxClose').addEventListener('click', () => { stopLightboxMedia(); lightbox.classList.remove('open'); });
-document.getElementById('lightboxPrev').addEventListener('click', () => { stopLightboxMedia(); currentPhoto = (currentPhoto - 1 + GALLERY_COUNT) % GALLERY_COUNT; renderLightbox(); });
-document.getElementById('lightboxNext').addEventListener('click', () => { stopLightboxMedia(); currentPhoto = (currentPhoto + 1) % GALLERY_COUNT; renderLightbox(); });
-lightbox.addEventListener('click', (e) => { if (e.target === lightbox) { stopLightboxMedia(); lightbox.classList.remove('open'); } });
-document.addEventListener('keydown', (e) => {
-  if (!lightbox.classList.contains('open')) return;
-  if (e.key === 'Escape') { stopLightboxMedia(); lightbox.classList.remove('open'); }
-  if (e.key === 'ArrowLeft') document.getElementById('lightboxPrev').click();
-  if (e.key === 'ArrowRight') document.getElementById('lightboxNext').click();
-});
+function openLightbox(i) { 
+  if (!lightbox) return;
+  currentPhoto = i; 
+  renderLightbox(); 
+  lightbox.classList.add('open'); 
+}
 
-/* ---------------- Build: Memory cards ---------------- */
-const memoryGrid = document.getElementById('memoryGrid');
-MEMORIES.forEach(m => {
-  const div = document.createElement('div');
-  div.className = 'memory-card reveal-scale';
-  div.innerHTML = `<div class="icon">${m.icon}</div><h3>${m.title}</h3><p>${m.text}</p>`;
-  memoryGrid.appendChild(div);
-  revealObserver.observe(div);
+const lbClose = document.getElementById('lightboxClose');
+const lbPrev = document.getElementById('lightboxPrev');
+const lbNext = document.getElementById('lightboxNext');
+
+if (lbClose) lbClose.addEventListener('click', () => { stopLightboxMedia(); if (lightbox) lightbox.classList.remove('open'); });
+if (lbPrev) lbPrev.addEventListener('click', () => { stopLightboxMedia(); currentPhoto = (currentPhoto - 1 + GALLERY_COUNT) % GALLERY_COUNT; renderLightbox(); });
+if (lbNext) lbNext.addEventListener('click', () => { stopLightboxMedia(); currentPhoto = (currentPhoto + 1) % GALLERY_COUNT; renderLightbox(); });
+if (lightbox) {
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) { stopLightboxMedia(); lightbox.classList.remove('open'); } });
+}
+document.addEventListener('keydown', (e) => {
+  if (!lightbox || !lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') { stopLightboxMedia(); lightbox.classList.remove('open'); }
+  if (e.key === 'ArrowLeft' && lbPrev) lbPrev.click();
+  if (e.key === 'ArrowRight' && lbNext) lbNext.click();
 });
 
 /* ---------------- Build: Reasons I love you ---------------- */
 const reasonsGrid = document.getElementById('reasonsGrid');
-REASONS.forEach(r => {
-  const div = document.createElement('div');
-  div.className = 'reason-card reveal-scale';
-  div.innerHTML = `<span class="heart-icon">❤</span><h3 style="font-size:1.15rem;font-family:var(--font-body);font-weight:600;color:var(--ink);">${r}</h3>`;
-  reasonsGrid.appendChild(div);
-  revealObserver.observe(div);
-});
-
-/* ---------------- Build: Future dreams ---------------- */
-const dreamsGrid = document.getElementById('dreamsGrid');
-DREAMS.forEach(d => {
-  const div = document.createElement('div');
-  div.className = 'dream-item reveal';
-  div.innerHTML = `<div class="dream-check">✓</div><span>${d}</span>`;
-  dreamsGrid.appendChild(div);
-  revealObserver.observe(div);
-});
+if (reasonsGrid) {
+  REASONS.forEach(r => {
+    const div = document.createElement('div');
+    div.className = 'reason-card reveal-scale';
+    div.innerHTML = `<span class="heart-icon">❤</span><p>${r}</p>`;
+    reasonsGrid.appendChild(div);
+    revealObserver.observe(div);
+  });
+}
 
 /* ---------------- Quote carousel ---------------- */
 const quoteSlides = document.querySelectorAll('.quote-slide');
 const quoteDotsWrap = document.getElementById('quoteDots');
-quoteSlides.forEach((_, i) => {
-  const dot = document.createElement('div');
-  dot.className = 'quote-dot' + (i === 0 ? ' active' : '');
-  dot.addEventListener('click', () => showQuote(i));
-  quoteDotsWrap.appendChild(dot);
-});
+if (quoteDotsWrap && quoteSlides.length > 0) {
+  quoteSlides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'quote-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => showQuote(i));
+    quoteDotsWrap.appendChild(dot);
+  });
+}
 let quoteIndex = 0;
 function showQuote(i) {
+  if (quoteSlides.length === 0) return;
   quoteIndex = i;
   quoteSlides.forEach((s, idx) => s.classList.toggle('active', idx === i));
-  quoteDotsWrap.querySelectorAll('.quote-dot').forEach((d, idx) => d.classList.toggle('active', idx === i));
+  if (quoteDotsWrap) {
+    quoteDotsWrap.querySelectorAll('.quote-dot').forEach((d, idx) => d.classList.toggle('active', idx === i));
+  }
 }
-setInterval(() => showQuote((quoteIndex + 1) % quoteSlides.length), 4500);
+if (quoteSlides.length > 0) {
+  setInterval(() => showQuote((quoteIndex + 1) % quoteSlides.length), 4500);
+}
 
 /* ---------------- Envelope + typewriter letter ---------------- */
 const envelope = document.getElementById('envelope');
 const letterPaper = document.getElementById('letterPaper');
 const typewriterText = document.getElementById('typewriterText');
 let letterOpened = false;
-envelope.addEventListener('click', () => {
-  if (letterOpened) return;
-  letterOpened = true;
-  envelope.classList.add('open');
-  playSound('paper');
-  setTimeout(() => {
-    letterPaper.classList.add('show');
-    typewriteInto(typewriterText, LETTER_TEXT);
-  }, 500);
-});
+
+if (envelope && letterPaper && typewriterText) {
+  envelope.addEventListener('click', () => {
+    if (letterOpened) return;
+    letterOpened = true;
+    envelope.classList.add('open');
+    playSound('paper');
+    setTimeout(() => {
+      letterPaper.classList.add('show');
+      typewriteInto(typewriterText, LETTER_TEXT);
+    }, 500);
+  });
+}
+
 function typewriteInto(el, text, speed = 28) {
   let i = 0;
   el.innerHTML = '<span class="typewriter-cursor">&nbsp;</span>';
   const cursor = el.querySelector('.typewriter-cursor');
   const interval = setInterval(() => {
-    if (i >= text.length) { clearInterval(interval); cursor.remove(); return; }
-    cursor.insertAdjacentText('beforebegin', text[i]);
+    if (i >= text.length) { clearInterval(interval); if (cursor) cursor.remove(); return; }
+    if (cursor) cursor.insertAdjacentText('beforebegin', text[i]);
     i++;
   }, speed);
 }
 
-/* Hidden "open when you're sad" letter */
-document.getElementById('hiddenLetterTrigger').addEventListener('click', () => openPopup('sadLetterPopup'));
+/* Hidden "open when you're sad" letter trigger */
+const hiddenLetterTrigger = document.getElementById('hiddenLetterTrigger');
+if (hiddenLetterTrigger) {
+  hiddenLetterTrigger.addEventListener('click', () => openPopup('sadLetterPopup'));
+}
 
 /* ---------------- Live relationship timer ---------------- */
 function updateTimer() {
@@ -392,12 +422,17 @@ function updateTimer() {
   if (days < 0) { const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0); days += prevMonth.getDate(); months--; }
   if (months < 0) { months += 12; years--; }
 
-  document.getElementById('t-years').textContent = String(Math.max(years,0)).padStart(2, '0');
-  document.getElementById('t-months').textContent = String(Math.max(months,0)).padStart(2, '0');
-  document.getElementById('t-days').textContent = String(Math.max(days,0)).padStart(2, '0');
-  document.getElementById('t-hours').textContent = String(Math.max(hours,0)).padStart(2, '0');
-  document.getElementById('t-mins').textContent = String(Math.max(mins,0)).padStart(2, '0');
-  document.getElementById('t-secs').textContent = String(Math.max(secs,0)).padStart(2, '0');
+  const setElemText = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  };
+
+  setElemText('t-years', String(Math.max(years,0)).padStart(2, '0'));
+  setElemText('t-months', String(Math.max(months,0)).padStart(2, '0'));
+  setElemText('t-days', String(Math.max(days,0)).padStart(2, '0'));
+  setElemText('t-hours', String(Math.max(hours,0)).padStart(2, '0'));
+  setElemText('t-mins', String(Math.max(mins,0)).padStart(2, '0'));
+  setElemText('t-secs', String(Math.max(secs,0)).padStart(2, '0'));
 }
 updateTimer();
 setInterval(updateTimer, 1000);
@@ -415,34 +450,47 @@ setInterval(updateTimer, 1000);
 /* ---------------- Music player ---------------- */
 const musicFab = document.getElementById('musicFab');
 function updateMusicIcon() {
+  if (!musicFab || !bgAudio) return;
   musicFab.textContent = bgAudio.paused ? '🎵' : '⏸';
 }
-musicFab.addEventListener('click', () => {
-  if (bgAudio.paused) { bgAudio.play().catch(() => {}); } else { bgAudio.pause(); }
+if (musicFab && bgAudio) {
+  musicFab.addEventListener('click', () => {
+    if (bgAudio.paused) { bgAudio.play().catch(() => {}); } else { bgAudio.pause(); }
+    updateMusicIcon();
+  });
   updateMusicIcon();
-});
-updateMusicIcon();
+}
 
 /* ---------------- Secret message: 5 heart taps ---------------- */
 const surpriseHeart = document.getElementById('surpriseHeart');
+const secretMessageText = document.getElementById('secretMessageText');
+if (secretMessageText) secretMessageText.textContent = SECRET_MESSAGE;
+
 let heartTaps = 0;
-document.getElementById('secretMessageText').textContent = SECRET_MESSAGE;
-surpriseHeart.addEventListener('click', () => {
-  heartTaps++;
-  surpriseHeart.style.transform = `scale(${1 + heartTaps * 0.08})`;
-  if (heartTaps >= 5) {
-    heartTaps = 0;
-    surpriseHeart.style.transform = 'scale(1)';
-    openPopup('secretPopup');
-    launchConfetti(120);
-    playSound('confetti');
-    setTimeout(() => openPopup('thankYouPopup'), 1600);
-  }
-});
+if (surpriseHeart) {
+  surpriseHeart.addEventListener('click', () => {
+    heartTaps++;
+    surpriseHeart.style.transform = `scale(${1 + heartTaps * 0.08})`;
+    if (heartTaps >= 5) {
+      heartTaps = 0;
+      surpriseHeart.style.transform = 'scale(1)';
+      openPopup('secretPopup');
+      launchConfetti(120);
+      playSound('confetti');
+      setTimeout(() => openPopup('thankYouPopup'), 1600);
+    }
+  });
+}
 
 /* ---------------- Popups ---------------- */
-function openPopup(id) { document.getElementById(id).classList.add('open'); }
-function closePopup(id) { document.getElementById(id).classList.remove('open'); }
+function openPopup(id) { 
+  const el = document.getElementById(id);
+  if (el) el.classList.add('open'); 
+}
+function closePopup(id) { 
+  const el = document.getElementById(id);
+  if (el) el.classList.remove('open'); 
+}
 document.querySelectorAll('.popup-close').forEach(btn => {
   btn.addEventListener('click', () => closePopup(btn.dataset.close));
 });
@@ -454,6 +502,7 @@ document.querySelectorAll('.popup-overlay').forEach(ov => {
 (function showRandomMemory() {
   const banner = document.getElementById('randomMemoryBanner');
   const text = document.getElementById('randomMemoryText');
+  if (!banner || !text || MEMORIES.length === 0) return;
   const pick = MEMORIES[Math.floor(Math.random() * MEMORIES.length)];
   text.textContent = `Remember: ${pick.title}`;
   setTimeout(() => {
@@ -464,14 +513,18 @@ document.querySelectorAll('.popup-overlay').forEach(ov => {
 
 /* ---------------- Confetti ---------------- */
 const confettiCanvas = document.getElementById('confetti-canvas');
-const ctx = confettiCanvas.getContext('2d');
-function resizeCanvas() { confettiCanvas.width = window.innerWidth; confettiCanvas.height = window.innerHeight; }
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
+let ctx = null;
+if (confettiCanvas) {
+  ctx = confettiCanvas.getContext('2d');
+  function resizeCanvas() { confettiCanvas.width = window.innerWidth; confettiCanvas.height = window.innerHeight; }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+}
 
 let confettiPieces = [];
-const CONFETTI_COLORS = ['#FF4D8D', '#FFD6E7', '#F3C77A', '#FFFFFF'];
+const CONFETTI_COLORS = ['#d10020', '#8b0015', '#d4af37', '#FFFFFF'];
 function launchConfetti(count = 150) {
+  if (!confettiCanvas) return;
   for (let i = 0; i < count; i++) {
     confettiPieces.push({
       x: Math.random() * confettiCanvas.width,
@@ -488,33 +541,40 @@ function launchConfetti(count = 150) {
   }
 }
 function confettiLoop() {
-  ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-  confettiPieces.forEach(p => {
-    p.y += p.speed; p.x += p.drift; p.rot += p.rotSpeed; p.life++;
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.rot * Math.PI / 180);
-    ctx.fillStyle = p.color;
-    ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-    ctx.restore();
-  });
-  confettiPieces = confettiPieces.filter(p => p.y < confettiCanvas.height + 40 && p.life < 500);
+  if (confettiCanvas && ctx) {
+    ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    confettiPieces.forEach(p => {
+      p.y += p.speed; p.x += p.drift; p.rot += p.rotSpeed; p.life++;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot * Math.PI / 180);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    });
+    confettiPieces = confettiPieces.filter(p => p.y < confettiCanvas.height + 40 && p.life < 500);
+  }
   requestAnimationFrame(confettiLoop);
 }
 confettiLoop();
 
 /* Trigger big confetti finale when the final screen comes into view */
-const finalObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      launchConfetti(200);
-      playSound('confetti');
-      finalObserver.disconnect();
-    }
-  });
-}, { threshold: 0.5 });
-finalObserver.observe(document.getElementById('forever'));
+const foreverSection = document.getElementById('forever');
+if (foreverSection) {
+  const finalObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        launchConfetti(200);
+        playSound('confetti');
+        finalObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+  finalObserver.observe(foreverSection);
+}
 
 /* ---------------- Footer year ---------------- */
-document.querySelector('footer').textContent =
-  document.querySelector('footer').textContent.replace('{YEAR}', new Date().getFullYear());
+const footerEl = document.querySelector('footer');
+if (footerEl) {
+  footerEl.textContent = footerEl.textContent.replace('{YEAR}', new Date().getFullYear());
+}
