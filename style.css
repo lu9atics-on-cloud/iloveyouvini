@@ -515,21 +515,6 @@ h1,h2,h3{ font-family: var(--font-display); color: var(--gold); font-weight: 600
 }
 .hidden-letter-trigger:hover{ color: var(--text-main); border-color: var(--blood-red); }
 
-/* ============================================================
-   Reasons I love you
-   ============================================================ */
-.reasons-grid{
-  display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 20px; max-width: 1000px; margin: 0 auto;
-}
-.reason-card{
-  background: linear-gradient(155deg, var(--bg-panel), var(--bg-dark));
-  border: 1px solid rgba(255,255,255,0.03);
-  border-radius: var(--radius-md); padding: 26px 20px; text-align:center;
-  transition: transform 0.35s ease, border-color 0.35s ease;
-}
-.reason-card:hover{ transform: translateY(-8px) scale(1.03); border-color: rgba(209,0,32,0.3); box-shadow: var(--shadow-hover); }
-.reason-card .heart-icon{ font-size:1.6rem; color: var(--blood-red); margin-bottom:12px; display:block; filter: drop-shadow(0 0 8px rgba(209,0,32,0.4)); }
-.reason-card p{ font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
 
 /* Quote carousel */
 .quote-carousel{ max-width: 680px; margin: 0 auto; text-align:center; position:relative; }
